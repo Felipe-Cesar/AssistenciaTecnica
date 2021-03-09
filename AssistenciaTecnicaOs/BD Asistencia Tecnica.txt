@@ -1,0 +1,58 @@
+-- Usuario administrador == Login: admin Senha: admin
+-- A linha abaixo cria o banco de dados
+CREATE database dbinfo;
+
+-- A linha abaixo escolhe o banco de dados
+use dbinfo;
+ 
+-- O bloco de instruçoes abaixo cria a tabela
+CREATE table tbusuario(
+iduser int auto_increment primary key,
+usuario varchar(50)not null,
+fone varchar(15),
+login varchar(15) not null unique,
+senha varchar(15) not null,
+perfil varchar(20) not null
+);
+
+create table tbclientes(
+idcli int primary key auto_increment,
+nomecli varchar(50),
+endcli varchar(100),
+fonecli varchar(50) not null,
+emailcli varchar(50)
+);
+
+create table tbos(
+os int primary key auto_increment,
+data_os timestamp default current_timestamp, -- pega a hora do servidor e insere nesse campo
+tipo varchar(15) not null,
+situacao varchar(30) not null,
+equipamento varchar(150) not null,
+defeito varchar(150) not null,
+servico varchar(150),
+tecnico varchar(30),
+valor decimal(10,2), -- 10 digitos com 2 casas decimais depois da virgula
+idcli int not null,
+foreign key(idcli) references tbclientes(idcli) -- vincula o idcli do da tabela tbos com a pk da tabela tbclientes
+);
+
+insert into tbusuario(usuario,fone,login,senha,perfil)
+values('administrador','0000-0000','admin','admin','admin');
+
+insert into tbusuario(usuario,fone,login,senha,perfil)
+values('Ronaldo Silva','8080-0130','ronaldo','123','user');
+
+insert into tbusuario(usuario,fone,login,senha,perfil)
+values('Maria Joaquina','5555-5050','maria','1234','user');
+
+
+insert into tbclientes(nomecli,endcli,fonecli,emailcli)
+values('linus torvalds','Rua do bobos, 0','6666-5555','oloquinho@meu.com');
+
+insert into tbclientes(nomecli,endcli,fonecli,emailcli)
+values('Vitor Oliveira','Rua Augusta, 116','1010-5555','vitor@email.com');
+
+insert into tbclientes(nomecli,endcli,fonecli,emailcli)
+values('Luiza de Souza','Av paulista, 15','2345-6670','luiza@email.com');
+
